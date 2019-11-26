@@ -14,11 +14,15 @@ postsurvey
 #Reclassify '99' as missing.
 presurvey_1<-presurvey %>%
   na_if(99)
+
+
 postsurvey_1<-postsurvey %>%
   na_if(99)
 
 #Left join pre and post survey data.
-prepost<-left_join(presurvey_1, postsurvey_1, by = "ID")
+prepost<- left_join(presurvey_1, postsurvey_1, by = "ID")
+
+prepost
 
 #Perform t tests. 
 t.test(prepost$awg, prepost$bwg, data = prepost, paired = TRUE, conf.level=0.95)
@@ -31,3 +35,10 @@ t.test(prepost$anfl, prepost$bnfl, data = prepost, paired = TRUE, conf.level=0.9
 t.test(prepost$acook, prepost$bcook, data = prepost, paired = TRUE, conf.level=0.95)
 t.test(prepost$asnap, prepost$bsnap, data = prepost, paired = TRUE, conf.level=0.95)
 t.test(prepost$apa, prepost$bpa, data = prepost, paired = TRUE, conf.level=0.95)
+#From this we learn that only the difference between asnap and bsnap are statistically significant.
+
+#Create graphic for the difference observed between asnap and bsnap
+change = prepost$bsnap - prepost$asnap
+plot(change, ylab = "Behavior Change (between pre and post-survey)") + abline(0,0, col="red", lwd=2)
+
+
