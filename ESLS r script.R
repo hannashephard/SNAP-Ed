@@ -14,17 +14,14 @@ postsurvey
 #Reclassify '99' as missing.
 presurvey_1<-presurvey %>%
   na_if(99)
-
-
 postsurvey_1<-postsurvey %>%
   na_if(99)
 
 #Left join pre and post survey data.
 prepost<- left_join(presurvey_1, postsurvey_1, by = "ID")
-
 prepost
 
-#Perform t tests. 
+#Perform paired t-tests. 
 t.test(prepost$awg, prepost$bwg, data = prepost, paired = TRUE, conf.level=0.95)
 t.test(prepost$abeans, prepost$bbeans, data = prepost, paired = TRUE, conf.level=0.95)
 t.test(prepost$afruit, prepost$bfruit, data = prepost, paired = TRUE, conf.level=0.95)
