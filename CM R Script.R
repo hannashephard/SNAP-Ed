@@ -3,5 +3,5 @@ Cooking_Matters_Combined_Data <-read_excel("/Users/hannashephard/Desktop/SNAP-Ed
 CM_data<-as_tibble(Cooking_Matters_Combined_Data)
 
 #Run frequencies.
-lapply(CM_data, function(x) prop.table(table(x)))
+lapply(CM_data, function(x) prop.table(table(x, exclude=NULL)))
 
